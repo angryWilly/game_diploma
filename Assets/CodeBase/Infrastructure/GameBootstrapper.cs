@@ -1,20 +1,24 @@
 using CodeBase.Infrastructure.States;
 using CodeBase.Logic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace CodeBase.Infrastructure
 {
     public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
     {
+        public LoadingCurtain CurtainPrefab;
+        
         private Game _game;
-        [SerializeField] private LoadingCurtain _curtain;
-    
+
         private void Awake()
         {
-            _game = new Game(this, _curtain);
+            _game = new Game(this, Instantiate(CurtainPrefab));
             _game.StateMachine.Enter<BootstrapState>(); 
            
             DontDestroyOnLoad(this);
         }
+
+
     }
 }
