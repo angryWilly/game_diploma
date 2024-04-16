@@ -1,5 +1,4 @@
-﻿using System;
-using CodeBase.Hero;
+﻿using CodeBase.Hero;
 using UnityEngine;
 
 namespace CodeBase.UI
@@ -22,7 +21,7 @@ namespace CodeBase.UI
 
         private void UpdateHpBar()
         {
-            _hpBar.SetValue(_heroHealth.Current,_heroHealth.Max);
+            _hpBar.SetValue(_heroHealth.Current, _heroHealth.Max);
         }
     }
 }

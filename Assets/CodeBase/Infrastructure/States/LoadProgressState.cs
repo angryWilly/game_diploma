@@ -37,8 +37,10 @@ namespace CodeBase.Infrastructure.States
         {
             var progress = new PlayerProgress(initialLevel: "Main");
 
-            progress.HeroState.MaxHP = 50;
+            progress.HeroState.MaxHP = 50f;
             progress.HeroState.ResetHp();
+            progress.HeroStats.Damage = 1f;
+            progress.HeroStats.DamageRadius = 0.5f;
 
             return progress;
         }

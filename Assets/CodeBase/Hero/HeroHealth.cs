@@ -1,17 +1,18 @@
 ﻿using System;
 using CodeBase.Data;
 using CodeBase.Infrastructure.Services.PersistentProgress;
+using CodeBase.Logic;
 using UnityEngine;
 
 namespace CodeBase.Hero
 {
     [RequireComponent(typeof(HeroAnimator))]
-    public class HeroHealth : MonoBehaviour, ISavedProgress
+    public class HeroHealth : MonoBehaviour, ISavedProgress, IHealth
     {
         [SerializeField] private HeroAnimator _animator;
         private State _state;
 
-        public Action HealthChanged;
+        public event Action HealthChanged;
 
         public float Current
         {
@@ -20,9 +21,8 @@ namespace CodeBase.Hero
             {
                 if (_state.CurrentHP != value)
                 {
-                    HealthChanged?.Invoke();
-                    
                     _state.CurrentHP = value;
+                    HealthChanged?.Invoke();
                 }
             }
         }
@@ -53,6 +53,7 @@ namespace CodeBase.Hero
 
             Current -= damage;
             _animator.PlayHit();
+            Debug.Log(Current);
         }
     }
 }
