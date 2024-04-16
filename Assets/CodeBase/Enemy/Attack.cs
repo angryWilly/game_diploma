@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services;
+using CodeBase.Logic;
 using UnityEngine;
 
 namespace CodeBase.Enemy
@@ -12,7 +13,8 @@ namespace CodeBase.Enemy
         
         [SerializeField] private EnemyAnimator _animator;
         [SerializeField] private float _cleavage = 0.5f;
-        [SerializeField] private float EffectiveDistance = 0.5f;
+        [SerializeField] private float _effectiveDistance = 0.5f;
+        [SerializeField] private float _damage = 10f;
 
         private IGameFactory _factory;
         private Transform _heroTransform;
@@ -43,6 +45,7 @@ namespace CodeBase.Enemy
             if (Hit(out Collider hit))
             {
                 PhysicsDebug.DrawDebug(StartPoint(), _cleavage, 1);
+                hit.transform.GetComponent<IHealth>().TakeDamage(_damage);
             }
         }
 
@@ -69,7 +72,7 @@ namespace CodeBase.Enemy
 
         private Vector3 StartPoint() =>
             new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z) +
-            transform.forward * EffectiveDistance;
+            transform.forward * _effectiveDistance;
 
         private void StartAttack()
         {
@@ -89,7 +92,7 @@ namespace CodeBase.Enemy
             _IsAttackActive && !_isAttacking && IsCooldownUp();
 
         private bool IsCooldownUp() => 
-            _attackCooldown <= 0;
+            _attackCooldown <= 0f;
 
         private void OnHeroCreated() =>
             _heroTransform = _factory.HeroGameObject.transform;
