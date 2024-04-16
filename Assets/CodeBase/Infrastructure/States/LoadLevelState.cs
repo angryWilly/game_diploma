@@ -1,7 +1,9 @@
 ﻿using CodeBase.CameraLogic;
+using CodeBase.Hero;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Logic;
+using CodeBase.UI;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
@@ -52,8 +54,10 @@ namespace CodeBase.Infrastructure.States
         private void InitGameWorld()
         {
             GameObject hero = _gameFactory.CreateHero(at: GameObject.FindWithTag(InitialPointTag));
-
-            _gameFactory.CreateHud();
+            
+            GameObject hud = _gameFactory.CreateHud();
+            hud.GetComponentInChildren<ActorUI>()
+                .Construct(hero.GetComponentInChildren<HeroHealth>());
 
             CameraFollow(hero);
         }
