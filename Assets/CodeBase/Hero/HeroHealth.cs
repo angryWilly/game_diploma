@@ -53,7 +53,6 @@ namespace CodeBase.Hero
 
             Current -= damage;
             _animator.PlayHit();
-            Debug.Log(Current);
         }
     }
 }
