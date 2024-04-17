@@ -56,55 +56,13 @@ Animator:
   m_GameObject: {fileID: 1500939411536426}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 3dc717adf98c7b043a3e77ed0130d470, type: 3}
-  m_Controller: {fileID: 9100000, guid: 483be6d2a23672442b51a01e45b2045d, type: 2}
+  m_Controller: {fileID: 9100000, guid: 699b09c078eb66447bc699206c1886b8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: '
-
-    Transform ''Head'' has been deleted
-
-    Transform ''Hand_L''
-    has been deleted
-
-    Transform ''Lower_Arm_L'' has been deleted
-
-    Transform
-    ''Upper_Arm_L'' has been deleted
-
-    Transform ''Hand_R'' has been deleted
-
-    Transform
-    ''Rower_Arm_R'' has been deleted
-
-    Transform ''Upper_Arm_R'' has been deleted
-
-    Transform
-    ''Spine'' has been deleted
-
-    Transform ''Toes_L'' has been deleted
-
-    Transform
-    ''Foot_L'' has been deleted
-
-    Transform ''Lower_Leg_L'' has been deleted
-
-    Transform
-    ''Upper_Leg_L'' has been deleted
-
-    Transform ''Toes_R'' has been deleted
-
-    Transform
-    ''Foot_R'' has been deleted
-
-    Transform ''Rower_Reg_R'' has been deleted
-
-    Transform
-    ''Upper_Reg_R'' has been deleted
-
-    Transform ''Hips'' has been deleted'
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -198,10 +156,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackCooldown: 3
+  Cleavage: 0.5
+  EffectiveDistance: 0.5
+  Damage: 10
   _animator: {fileID: 1759886331324184333}
-  _cleavage: 0.5
-  _effectiveDistance: 0.5
-  _damage: 10
 --- !u!114 &8346439378712473416
 MonoBehaviour:
   m_ObjectHideFlags: 0
