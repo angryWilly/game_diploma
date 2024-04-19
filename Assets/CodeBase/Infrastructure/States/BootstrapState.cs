@@ -42,11 +42,11 @@ namespace CodeBase.Infrastructure.States
         {
             RegisterStaticData();
             _services.RegisterSingle<IInputService>(InputService());
-            _services.RegisterSingle<IAssets>(new AssetsProvider());
+            _services.RegisterSingle<IAssetProvider>(new AssetProviderProvider());
             _services.RegisterSingle<IRandomService>(new RandomService());
             _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
             _services.RegisterSingle<IGameFactory>(
-                new GameFactory(_services.Single<IAssets>(),
+                new GameFactory(_services.Single<IAssetProvider>(),
                     _services.Single<IStaticDataService>(),
                     _services.Single<IRandomService>(), _services.Single<IPersistentProgressService>()));
             _services.RegisterSingle<ISaveLoadService>(

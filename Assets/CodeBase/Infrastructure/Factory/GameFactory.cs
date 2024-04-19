@@ -15,7 +15,7 @@ namespace CodeBase.Infrastructure.Factory
 {
     public class GameFactory : IGameFactory
     {
-        private readonly IAssets _assetsProvider;
+        private readonly IAssetProvider _assetProviderProvider;
         private readonly IStaticDataService _staticData;
         private readonly IRandomService _randomService;
         private readonly IPersistentProgressService _progressService;
@@ -24,10 +24,10 @@ namespace CodeBase.Infrastructure.Factory
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
         private GameObject HeroGameObject { get; set; }
 
-        public GameFactory(IAssets assetsProvider, IStaticDataService staticData, IRandomService randomService,
+        public GameFactory(IAssetProvider assetProviderProvider, IStaticDataService staticData, IRandomService randomService,
             IPersistentProgressService progressService) 
         {
-            _assetsProvider = assetsProvider;
+            _assetProviderProvider = assetProviderProvider;
             _staticData = staticData;
             _randomService = randomService;
             _progressService = progressService;
@@ -47,7 +47,7 @@ namespace CodeBase.Infrastructure.Factory
             return HeroGameObject;
         }
 
-        public GameObject CreateHud() => 
+        public GameObject CreateHud() =>
             InstantiateRegistered(AssetPath.HudPath);
 
         public GameObject CreateMonster(MonsterTypeId typeId, Transform parent)
@@ -91,14 +91,14 @@ namespace CodeBase.Infrastructure.Factory
 
         private GameObject InstantiateRegistered(string prefabPath, Vector3 at)
         {
-            GameObject gameObject = _assetsProvider.Instantiate(prefabPath, at);
+            GameObject gameObject = _assetProviderProvider.Instantiate(prefabPath, at);
             RegisterProgressWatchers(gameObject);
             return gameObject;
         }
 
         private GameObject InstantiateRegistered(string prefabPath)
         {
-            GameObject gameObject = _assetsProvider.Instantiate(prefabPath);
+            GameObject gameObject = _assetProviderProvider.Instantiate(prefabPath);
             RegisterProgressWatchers(gameObject);
             return gameObject;
         }
