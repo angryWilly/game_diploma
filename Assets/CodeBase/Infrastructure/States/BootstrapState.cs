@@ -1,11 +1,11 @@
 ﻿using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.Services.Input;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.Randomizer;
 using CodeBase.Infrastructure.Services.SaveLoad;
 using CodeBase.Infrastructure.StaticData;
-using CodeBase.Services.Input;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
@@ -58,7 +58,7 @@ namespace CodeBase.Infrastructure.States
         private void RegisterStaticData()
         {
             var staticData = new StaticDataService();
-            staticData.LoadMonsters();
+            staticData.Load();
             _services.RegisterSingle<IStaticDataService>(staticData);
         }
 
