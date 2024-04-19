@@ -42,7 +42,7 @@ namespace CodeBase.Infrastructure.States
         {
             RegisterStaticData();
             _services.RegisterSingle<IInputService>(InputService());
-            _services.RegisterSingle<IAssetProvider>(new AssetProviderProvider());
+            _services.RegisterSingle<IAssetProvider>(new AssetProvider());
             _services.RegisterSingle<IRandomService>(new RandomService());
             _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
             _services.RegisterSingle<IGameFactory>(
