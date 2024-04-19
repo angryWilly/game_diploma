@@ -203,6 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: {fileID: 5300576687817293451}
+  _move: {fileID: -5567068198290687892}
   _animator: {fileID: 1759886331324184333}
   _deathFx: {fileID: 100004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
 --- !u!114 &1302614039627434774

@@ -9,6 +9,7 @@ namespace CodeBase.Enemy
     public class EnemyDeath : MonoBehaviour
     {
         [SerializeField] private EnemyHealth _health;
+        [SerializeField] private AgentMoveToPlayer _move;
         [SerializeField] private EnemyAnimator _animator;
         [SerializeField] private GameObject _deathFx;
 
@@ -29,7 +30,8 @@ namespace CodeBase.Enemy
         private void Die()
         {
             _health.HealthChanged -= OnHealthChanged;
-            
+
+            _move.enabled = false;
             _animator.PlayDeath();
             
             SpawnDeathFx();
