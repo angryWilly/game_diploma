@@ -4,7 +4,6 @@ using CodeBase.Hero;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
-using CodeBase.Infrastructure.StaticData;
 using CodeBase.Logic;
 using CodeBase.UI;
 using UnityEngine;

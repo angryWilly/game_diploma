@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using CodeBase.Enemy;
 using CodeBase.Enemy.LootEnemy;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
