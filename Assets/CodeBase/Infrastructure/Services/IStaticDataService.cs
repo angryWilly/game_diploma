@@ -1,11 +1,12 @@
-﻿using CodeBase.Enemy;
-using CodeBase.Infrastructure.Services;
+﻿using CodeBase.Data;
+using CodeBase.Infrastructure.StaticData;
 
-namespace CodeBase.Infrastructure.StaticData
+namespace CodeBase.Infrastructure.Services
 {
     public interface IStaticDataService : IService
     {
-        void LoadMonsters();
+        void Load();
         MonsterStaticData ForMonster(MonsterTypeId typeId);
+        LevelStaticData ForLevel(string sceneKey);
     }
 }

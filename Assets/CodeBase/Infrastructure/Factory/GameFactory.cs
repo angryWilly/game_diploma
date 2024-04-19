@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Enemy;
+using CodeBase.Enemy.EnemySpawners;
 using CodeBase.Enemy.LootEnemy;
 using CodeBase.Infrastructure.AssetManagement;
+using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.Randomizer;
 using CodeBase.Infrastructure.StaticData;
@@ -31,14 +33,6 @@ namespace CodeBase.Infrastructure.Factory
             _staticData = staticData;
             _randomService = randomService;
             _progressService = progressService;
-        }
-
-        public void Register(ISavedProgressReader progressReader)
-        {
-            if (progressReader is ISavedProgress progressWriter)
-                ProgressWriters.Add(progressWriter);
-            
-            ProgressReaders.Add(progressReader);
         }
 
         public GameObject CreateHero(GameObject at)
@@ -83,10 +77,28 @@ namespace CodeBase.Infrastructure.Factory
             return lootPiece;
         }
 
+        public void CreateSpawner(Vector3 at, string spawnerId, MonsterTypeId monsterTypeId)
+        {
+            var spawner = InstantiateRegistered(AssetPath.Spawner, at)
+                .GetComponent<SpawnPoint>();
+
+            spawner.Construct(this);
+            spawner.Id = spawnerId;
+            spawner.MonsterTypeId = monsterTypeId;
+        }
+
         public void CleanUp()
         {
             ProgressReaders.Clear();
             ProgressWriters.Clear();
+        }
+
+        private void Register(ISavedProgressReader progressReader)
+        {
+            if (progressReader is ISavedProgress progressWriter)
+                ProgressWriters.Add(progressWriter);
+            
+            ProgressReaders.Add(progressReader);
         }
 
         private GameObject InstantiateRegistered(string prefabPath, Vector3 at)
