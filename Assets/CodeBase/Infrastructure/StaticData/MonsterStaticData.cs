@@ -12,6 +12,10 @@ namespace CodeBase.Infrastructure.StaticData
 
         [Range(1, 30)] public float Damage = 10;
 
+        public int MaxLoot;
+        
+        public int MinLoot;
+
         [Range(.5f, 1)] public float EffectiveDistance = .5f;
 
         [Range(.5f, 1)] public float Cleavage = .5f;
