@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Enemy;
+using CodeBase.Enemy.LootEnemy;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.Randomizer;

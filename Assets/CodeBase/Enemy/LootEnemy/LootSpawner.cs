@@ -3,7 +3,7 @@ using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services.Randomizer;
 using UnityEngine;
 
-namespace CodeBase.Enemy
+namespace CodeBase.Enemy.LootEnemy
 {
     public class LootSpawner : MonoBehaviour
     {
@@ -45,7 +45,9 @@ namespace CodeBase.Enemy
             _lootMax = max;
         }
 
+        /*
         private void OnDestroy() =>
             EnemyDeath.Happened -= SpawnLoot;
+    */
     }
 }
