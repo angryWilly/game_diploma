@@ -19,7 +19,7 @@ namespace CodeBase.UI
         {
             IHealth health = GetComponent<IHealth>();
 
-            if (health != null) 
+            if (health != null)
                 Construct(health);
         }
 

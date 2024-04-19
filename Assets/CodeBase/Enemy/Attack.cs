@@ -82,10 +82,10 @@ namespace CodeBase.Enemy
                 _attackCooldown -= Time.deltaTime;
         }
 
-        private bool CanAttack() => 
+        private bool CanAttack() =>
             _IsAttackActive && !_isAttacking && IsCooldownUp();
 
-        private bool IsCooldownUp() => 
+        private bool IsCooldownUp() =>
             _attackCooldown <= 0f;
     }
 }

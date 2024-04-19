@@ -19,7 +19,7 @@ namespace CodeBase.Infrastructure.Factory
     {
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
-        
+
         private readonly IAssetProvider _assetProvider;
         private readonly IStaticDataService _staticData;
         private readonly IRandomService _randomService;
@@ -27,7 +27,7 @@ namespace CodeBase.Infrastructure.Factory
         private GameObject HeroGameObject { get; set; }
 
         public GameFactory(IAssetProvider assetProvider, IStaticDataService staticData, IRandomService randomService,
-            IPersistentProgressService progressService) 
+            IPersistentProgressService progressService)
         {
             _assetProvider = assetProvider;
             _staticData = staticData;
@@ -48,7 +48,7 @@ namespace CodeBase.Infrastructure.Factory
         {
             MonsterStaticData monsterData = _staticData.ForMonster(typeId);
             var monster = Object.Instantiate(monsterData.Prefab, parent.position, Quaternion.identity, parent);
-            
+
             var health = monster.GetComponent<IHealth>();
             health.Current = monsterData.Hp;
             health.Max = monsterData.Hp;
@@ -60,7 +60,7 @@ namespace CodeBase.Infrastructure.Factory
             var lootSpawner = monster.GetComponentInChildren<LootSpawner>();
             lootSpawner.SetLoot(monsterData.MinLoot, monsterData.MaxLoot);
             lootSpawner.Construct(this, _randomService);
-            
+
             var attack = monster.GetComponent<Attack>();
             attack.Construct(HeroGameObject.transform);
             attack.Damage = monsterData.Damage;
@@ -97,7 +97,7 @@ namespace CodeBase.Infrastructure.Factory
         {
             if (progressReader is ISavedProgress progressWriter)
                 ProgressWriters.Add(progressWriter);
-            
+
             ProgressReaders.Add(progressReader);
         }
 

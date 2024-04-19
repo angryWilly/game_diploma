@@ -34,7 +34,7 @@ namespace CodeBase.Infrastructure.States
             _progressService = progressService;
             _staticDataService = staticDataService;
         }
-        
+
         public void Enter(string sceneName)
         {
             _curtain.Show();

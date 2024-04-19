@@ -14,12 +14,12 @@ namespace CodeBase.Editor
         {
             var uniqueId = (UniqueId)target;
 
-            if (string.IsNullOrEmpty(uniqueId.Id)) 
+            if (string.IsNullOrEmpty(uniqueId.Id))
                 Generate(uniqueId);
             else
             {
                 UniqueId[] uniqueIds = FindObjectsOfType<UniqueId>();
-                
+
                 if (uniqueIds.Any(other => other != uniqueId && other.Id == uniqueId.Id))
                     Generate(uniqueId);
             }

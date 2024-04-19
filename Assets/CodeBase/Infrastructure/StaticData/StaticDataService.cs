@@ -24,15 +24,14 @@ namespace CodeBase.Infrastructure.StaticData
                 .ToDictionary(x => x.LevelKey, x => x);
         }
 
-        public MonsterStaticData ForMonster(MonsterTypeId typeId) => 
+        public MonsterStaticData ForMonster(MonsterTypeId typeId) =>
             _monsters.TryGetValue(typeId, out MonsterStaticData staticData)
                 ? staticData
                 : null;
 
-        public LevelStaticData ForLevel(string sceneKey) => 
+        public LevelStaticData ForLevel(string sceneKey) =>
             _levels.TryGetValue(sceneKey, out LevelStaticData staticData)
                 ? staticData
                 : null;
-      
     }
 }

@@ -12,7 +12,7 @@ namespace CodeBase.Hero
     public class HeroMove : MonoBehaviour, ISavedProgress
     {
         [SerializeField] private float MovementSpeed = 10;
-        
+
         private CharacterController _characterController;
         private IInputService _inputService;
         private HeroAnimator _heroAnimator;
@@ -28,7 +28,7 @@ namespace CodeBase.Hero
         public void Update()
         {
             var movementVector = Vector3.zero;
-            
+
             if (!_heroAnimator.IsAttacking && _inputService.Axis.sqrMagnitude > 0.001f)
             {
                 movementVector = Camera.main.transform.TransformDirection(_inputService.Axis);
@@ -42,7 +42,8 @@ namespace CodeBase.Hero
         }
 
         public void UpdateProgress(PlayerProgress progress) =>
-            progress.WorldData.PositionOnLevel = new PositionOnLevel(CurrentLevel(), transform.position.AsVector3Data());
+            progress.WorldData.PositionOnLevel =
+                new PositionOnLevel(CurrentLevel(), transform.position.AsVector3Data());
 
         private string CurrentLevel() =>
             SceneManager.GetActiveScene().name;
@@ -52,7 +53,7 @@ namespace CodeBase.Hero
             if (CurrentLevel() == progress.WorldData.PositionOnLevel.Level)
             {
                 Vector3Data savedPosition = progress.WorldData.PositionOnLevel.Position;
-                if (savedPosition != null) 
+                if (savedPosition != null)
                     Warp(to: savedPosition);
             }
         }

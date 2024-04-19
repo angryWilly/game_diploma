@@ -4,10 +4,10 @@ using UnityEngine.AI;
 
 namespace CodeBase.Enemy
 {
-    public class AgentMoveToPlayer: MonoBehaviour
+    public class AgentMoveToPlayer : MonoBehaviour
     {
         private const float MinimalDistance = 1;
-        
+
         [SerializeField] private NavMeshAgent _agent;
         private Transform _heroTransform;
         private IGameFactory _gameFactory;

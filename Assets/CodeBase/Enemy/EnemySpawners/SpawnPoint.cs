@@ -14,7 +14,7 @@ namespace CodeBase.Enemy.EnemySpawners
         private IGameFactory _factory;
         private bool _slain;
 
-        public void Construct(IGameFactory factory) 
+        public void Construct(IGameFactory factory)
             => _factory = factory;
 
         public void LoadProgress(PlayerProgress progress)
@@ -37,7 +37,7 @@ namespace CodeBase.Enemy.EnemySpawners
                 .Happened += Slay;
         }
 
-        private void Slay() => 
+        private void Slay() =>
             _slain = true;
     }
 }

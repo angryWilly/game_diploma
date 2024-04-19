@@ -8,7 +8,7 @@ namespace CodeBase.Enemy.LootEnemy
     public class LootSpawner : MonoBehaviour
     {
         public EnemyDeath EnemyDeath;
-        
+
         private IGameFactory _factory;
         private IRandomService _random;
         private int _lootMin;
@@ -19,6 +19,7 @@ namespace CodeBase.Enemy.LootEnemy
             _factory = factory;
             _random = random;
         }
+
         private void Start()
         {
             EnemyDeath.Happened += SpawnLoot;

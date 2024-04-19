@@ -11,7 +11,7 @@ namespace CodeBase.Enemy.LootEnemy
         public GameObject PickUpFxPrefab;
         public TextMeshPro LootText;
         public GameObject PickUpPopUp;
-        
+
         private Loot _loot;
         private bool _isPickedUp;
         private WorldData _worldData;
@@ -32,7 +32,7 @@ namespace CodeBase.Enemy.LootEnemy
         {
             if (_isPickedUp)
                 return;
-            
+
             _isPickedUp = true;
 
             UpdateWorldData();
@@ -45,10 +45,10 @@ namespace CodeBase.Enemy.LootEnemy
         private void UpdateWorldData() =>
             _worldData.LootData.Collect(_loot);
 
-        private void HideSkull() => 
+        private void HideSkull() =>
             Skull.SetActive(false);
 
-        private void PlayPickUpFx() => 
+        private void PlayPickUpFx() =>
             Instantiate(PickUpFxPrefab, transform.position, Quaternion.identity);
 
         private void ShowText()

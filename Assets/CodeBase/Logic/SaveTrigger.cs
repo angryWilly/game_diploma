@@ -10,7 +10,7 @@ namespace CodeBase.Logic
     {
         private ISaveLoadService _saveLoadService;
         [SerializeField] private BoxCollider _collider;
-        
+
         private void Awake()
         {
             _saveLoadService = AllServices.Container.Single<ISaveLoadService>();
@@ -27,7 +27,7 @@ namespace CodeBase.Logic
         {
             if (!_collider)
                 return;
-            
+
             Gizmos.color = new Color32(30, 200, 30, 130);
             Gizmos.DrawCube(transform.position + _collider.center, _collider.size);
         }
