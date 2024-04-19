@@ -11,7 +11,6 @@ namespace CodeBase.Enemy
         public float Cleavage = 0.5f;
         public float EffectiveDistance = 0.5f;
         public float Damage = 10f;
-
         [SerializeField] private EnemyAnimator _animator;
 
         private Transform _heroTransform;

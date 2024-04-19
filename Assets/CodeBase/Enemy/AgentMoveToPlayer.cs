@@ -12,9 +12,9 @@ namespace CodeBase.Enemy
         private Transform _heroTransform;
         private IGameFactory _gameFactory;
 
-        public void Construct(Transform heroTransform) => 
+        public void Construct(Transform heroTransform) =>
             _heroTransform = heroTransform;
-        
+
         private void Update()
         {
             SetDestinationForAgent();
