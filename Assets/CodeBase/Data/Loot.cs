@@ -6,6 +6,5 @@ namespace CodeBase.Data
     public class Loot
     {
         public int Value;
-        public int Id;
     }
 }
