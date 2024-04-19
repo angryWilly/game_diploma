@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using CodeBase.Data;
-using CodeBase.Infrastructure.Services.PersistentProgress;
 using TMPro;
 using UnityEngine;
 
 namespace CodeBase.Enemy.LootEnemy
 {
-    public class LootPiece : MonoBehaviour, ISavedProgress
+    public class LootPiece : MonoBehaviour
     {
         public GameObject Skull;
         public GameObject PickUpFxPrefab;
@@ -62,16 +61,6 @@ namespace CodeBase.Enemy.LootEnemy
         {
             yield return new WaitForSeconds(1.5f);
             Destroy(gameObject);
-        }
-
-        public void LoadProgress(PlayerProgress progress)
-        {
-            
-        }
-
-        public void UpdateProgress(PlayerProgress progress)
-        {
-            
         }
     }
 }
