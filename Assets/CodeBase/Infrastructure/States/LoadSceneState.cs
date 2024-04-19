@@ -57,9 +57,7 @@ namespace CodeBase.Infrastructure.States
         {
             InitSpawners();
             GameObject hero = InitHero();
-
             InitHud(hero);
-
             CameraFollow(hero);
         }
 
@@ -82,6 +80,8 @@ namespace CodeBase.Infrastructure.States
             GameObject hud = _gameFactory.CreateHud();
             hud.GetComponentInChildren<ActorUI>()
                 .Construct(hero.GetComponentInChildren<HeroHealth>());
+            hud.GetComponentInChildren<LootCounter>()
+                .Construct(_progressService.Progress.WorldData);
         }
 
         private static void CameraFollow(GameObject hero)
