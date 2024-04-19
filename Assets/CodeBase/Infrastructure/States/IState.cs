@@ -9,11 +9,9 @@
     {
         public void Enter(TPayLoad sceneName);
     }
-    
+
     public interface IExitableState
     {
         public void Exit();
     }
-    
-
 }

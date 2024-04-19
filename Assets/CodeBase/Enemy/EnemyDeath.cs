@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace CodeBase.Enemy
 {
-    
     [RequireComponent(typeof(EnemyHealth), typeof(EnemyAnimator))]
     public class EnemyDeath : MonoBehaviour
     {
@@ -15,10 +14,10 @@ namespace CodeBase.Enemy
 
         public event Action Happened;
 
-        private void Start() => 
+        private void Start() =>
             _health.HealthChanged += OnHealthChanged;
 
-        private void OnDestroy() => 
+        private void OnDestroy() =>
             _health.HealthChanged -= OnHealthChanged;
 
         private void OnHealthChanged()
@@ -33,14 +32,14 @@ namespace CodeBase.Enemy
 
             _move.enabled = false;
             _animator.PlayDeath();
-            
+
             SpawnDeathFx();
             StartCoroutine(DestroyTimer());
-            
+
             Happened?.Invoke();
         }
 
-        private void SpawnDeathFx() => 
+        private void SpawnDeathFx() =>
             Instantiate(_deathFx, transform.position, Quaternion.identity);
 
         private IEnumerator DestroyTimer()

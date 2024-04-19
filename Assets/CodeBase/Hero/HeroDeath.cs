@@ -10,7 +10,7 @@ namespace CodeBase.Hero
         [SerializeField] private HeroAttack _attack;
         [SerializeField] private HeroAnimator _animator;
         [SerializeField] private GameObject DeathFx;
-        
+
         private bool _isDead;
 
         private void Start() =>
@@ -21,7 +21,7 @@ namespace CodeBase.Hero
 
         private void OnHealthChanged()
         {
-            if (!_isDead && _health.Current <= 0) 
+            if (!_isDead && _health.Current <= 0)
                 Die();
         }
 

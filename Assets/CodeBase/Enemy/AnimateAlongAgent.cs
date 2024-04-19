@@ -6,10 +6,10 @@ namespace CodeBase.Enemy
 {
     [RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(EnemyAnimator))]
-    public class AnimateAlongAgent: MonoBehaviour
+    public class AnimateAlongAgent : MonoBehaviour
     {
         private const float MinimalVelocity = 0.1f;
-        
+
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private EnemyAnimator _animator;
 
@@ -22,7 +22,7 @@ namespace CodeBase.Enemy
                 _animator.StopMoving();
         }
 
-        private bool ShouldMove() => 
+        private bool ShouldMove() =>
             _agent.velocity.magnitude > MinimalVelocity && _agent.remainingDistance > _agent.radius;
     }
 }

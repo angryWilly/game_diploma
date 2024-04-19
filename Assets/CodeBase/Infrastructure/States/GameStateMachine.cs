@@ -20,7 +20,8 @@ namespace CodeBase.Infrastructure.States
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
                 [typeof(LoadSceneState)] = new LoadSceneState(this, sceneLoader, curtain,
-                    services.Single<IGameFactory>(), services.Single<IPersistentProgressService>(), services.Single<IStaticDataService>()),
+                    services.Single<IGameFactory>(), services.Single<IPersistentProgressService>(),
+                    services.Single<IStaticDataService>()),
                 [typeof(LoadProgressState)] = new LoadProgressState(this, services.Single<IPersistentProgressService>(),
                     services.Single<ISaveLoadService>()),
                 [typeof(GameLoopState)] = new GameLoopState(this),
@@ -42,14 +43,14 @@ namespace CodeBase.Infrastructure.States
         private TState ChangeState<TState>() where TState : class, IExitableState
         {
             _activeState?.Exit();
-            
+
             TState state = GetState<TState>();
             _activeState = state;
-            
+
             return state;
         }
 
-        private TState GetState<TState>() where TState : class, IExitableState => 
+        private TState GetState<TState>() where TState : class, IExitableState =>
             _states[typeof(TState)] as TState;
     }
 }
