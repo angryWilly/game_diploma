@@ -1,7 +1,7 @@
 ﻿using CodeBase.Data;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services.PersistentProgress;
-using CodeBase.Infrastructure.StaticData;
+using CodeBase.StaticData;
 using UnityEngine;
 
 namespace CodeBase.Enemy.EnemySpawners
