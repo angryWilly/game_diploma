@@ -1,5 +1,7 @@
-﻿using CodeBase.CameraLogic;
+﻿using System.Collections.Generic;
+using CodeBase.CameraLogic;
 using CodeBase.Data;
+using CodeBase.Enemy.LootEnemy;
 using CodeBase.Hero;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services;
@@ -49,8 +51,8 @@ namespace CodeBase.Infrastructure.States
 
         private void OnLoaded()
         {
-            InitGameWorld();
             InitUIRoot();
+            InitGameWorld();
             InformProgressReaders();
 
             _stateMachine.Enter<GameLoopState>();
@@ -68,6 +70,7 @@ namespace CodeBase.Infrastructure.States
         private void InitGameWorld()
         {
             InitSpawners();
+            InitLootPieces();
             GameObject hero = InitHero();
             InitHud(hero);
             CameraFollow(hero);
@@ -80,6 +83,17 @@ namespace CodeBase.Infrastructure.States
             foreach (EnemySpawnerData spawnerData in levelData.EnemySpawners)
             {
                 _gameFactory.CreateSpawner(spawnerData.Position, spawnerData.Id, spawnerData.MonsterTypeId);
+            }
+        }
+
+        private void InitLootPieces()
+        {
+            foreach (KeyValuePair<string, LootPieceData> item in _progressService.Progress.WorldData.LootData.LootPiecesOnScene.Dictionary)
+            {
+                LootPiece lootPiece = _gameFactory.CreateLoot();
+                lootPiece.GetComponent<UniqueId>().Id = item.Key;
+                lootPiece.Initialize(item.Value.Loot);
+                lootPiece.transform.position = item.Value.Position.AsUnityVector3();
             }
         }
 

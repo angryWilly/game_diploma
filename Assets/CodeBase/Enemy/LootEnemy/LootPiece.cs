@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using CodeBase.Data;
+using CodeBase.Infrastructure.Services.PersistentProgress;
 using TMPro;
 using UnityEngine;
 
 namespace CodeBase.Enemy.LootEnemy
 {
-    public class LootPiece : MonoBehaviour
+    public class LootPiece : MonoBehaviour, ISavedProgress
     {
         public GameObject Skull;
         public GameObject PickUpFxPrefab;
@@ -14,6 +15,7 @@ namespace CodeBase.Enemy.LootEnemy
 
         private Loot _loot;
         private bool _isPickedUp;
+        private string _id;
         private WorldData _worldData;
 
         public void Construct(WorldData worldData)
@@ -61,6 +63,23 @@ namespace CodeBase.Enemy.LootEnemy
         {
             yield return new WaitForSeconds(1.5f);
             Destroy(gameObject);
+        }
+
+        public void LoadProgress(PlayerProgress progress)
+        {
+            if (_isPickedUp)
+                return;
+
+            LootPieceDataDictionary lootPiecesOnScene = progress.WorldData.LootData.LootPiecesOnScene;
+
+            if (!lootPiecesOnScene.Dictionary.ContainsKey(_id))
+                lootPiecesOnScene.Dictionary
+                    .Add(_id, new LootPieceData(transform.position.AsVector3Data(), _loot));
+        }
+
+        public void UpdateProgress(PlayerProgress progress)
+        {
+            
         }
     }
 }
