@@ -2,6 +2,7 @@
 using CodeBase.Infrastructure.Services;
 using CodeBase.StaticData.Windows;
 using CodeBase.UI.Services.Windows;
+using CodeBase.UI.Windows;
 using UnityEngine;
 
 namespace CodeBase.UI.Services.Factory
@@ -22,7 +23,7 @@ namespace CodeBase.UI.Services.Factory
         public void CreateShop()
         {
             WindowConfig config = _staticData.ForWindow(WindowId.Shop);
-            Object.Instantiate(config.Prefab, _uiRoot);
+            WindowBase windowBase = Object.Instantiate(config.Prefab, _uiRoot);
         }
 
         public void CreateUIRoot() => 
