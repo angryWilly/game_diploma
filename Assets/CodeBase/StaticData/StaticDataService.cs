@@ -2,16 +2,20 @@
 using System.Linq;
 using CodeBase.Data;
 using CodeBase.Infrastructure.Services;
+using CodeBase.StaticData.Windows;
+using CodeBase.UI.Services.Windows;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure.StaticData
+namespace CodeBase.StaticData
 {
     public class StaticDataService : IStaticDataService
     {
         private const string StaticDataMonstersPath = "StaticData/Monsters";
         private const string StaticDataLevelsPath = "StaticData/Levels";
+        private const string StaticDataWindowPath = "StaticData/UI/WindowStaticData";
         private Dictionary<MonsterTypeId, MonsterStaticData> _monsters;
         private Dictionary<string, LevelStaticData> _levels;
+        private Dictionary<WindowId, WindowConfig> _windowConfigs;
 
         public void Load()
         {
@@ -22,6 +26,11 @@ namespace CodeBase.Infrastructure.StaticData
             _levels = Resources
                 .LoadAll<LevelStaticData>(StaticDataLevelsPath)
                 .ToDictionary(x => x.LevelKey, x => x);
+            
+            _windowConfigs = Resources
+                .Load<WindowStaticData>(StaticDataWindowPath)
+                .Configs
+                .ToDictionary(x => x.WindowId, x => x);
         }
 
         public MonsterStaticData ForMonster(MonsterTypeId typeId) =>
@@ -32,6 +41,11 @@ namespace CodeBase.Infrastructure.StaticData
         public LevelStaticData ForLevel(string sceneKey) =>
             _levels.TryGetValue(sceneKey, out LevelStaticData staticData)
                 ? staticData
+                : null;
+
+        public WindowConfig ForWindow(WindowId windowId) =>
+            _windowConfigs.TryGetValue(windowId, out WindowConfig windowConfig)
+                ? windowConfig
                 : null;
     }
 }

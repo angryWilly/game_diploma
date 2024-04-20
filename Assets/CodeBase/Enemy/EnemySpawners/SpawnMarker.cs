@@ -1,4 +1,4 @@
-﻿using CodeBase.Infrastructure.StaticData;
+﻿using CodeBase.StaticData;
 using UnityEngine;
 
 namespace CodeBase.Enemy.EnemySpawners

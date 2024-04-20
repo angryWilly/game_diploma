@@ -6,6 +6,7 @@ using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Logic;
 using CodeBase.UI;
+using CodeBase.UI.Elements;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
