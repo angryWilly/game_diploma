@@ -8,8 +8,8 @@ using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.Randomizer;
 using CodeBase.Logic;
 using CodeBase.StaticData;
-using CodeBase.UI;
 using CodeBase.UI.Elements;
+using CodeBase.UI.Services.Windows;
 using UnityEngine;
 using UnityEngine.AI;
 using Object = UnityEngine.Object;
@@ -25,15 +25,17 @@ namespace CodeBase.Infrastructure.Factory
         private readonly IStaticDataService _staticData;
         private readonly IRandomService _randomService;
         private readonly IPersistentProgressService _progressService;
+        private readonly IWindowService _windowService;
         private GameObject HeroGameObject { get; set; }
 
         public GameFactory(IAssetProvider assetProvider, IStaticDataService staticData, IRandomService randomService,
-            IPersistentProgressService progressService)
+            IPersistentProgressService progressService, IWindowService windowService)
         {
             _assetProvider = assetProvider;
             _staticData = staticData;
             _randomService = randomService;
             _progressService = progressService;
+            _windowService = windowService;
         }
 
         public GameObject CreateHero(GameObject at)
@@ -42,8 +44,13 @@ namespace CodeBase.Infrastructure.Factory
             return HeroGameObject;
         }
 
-        public GameObject CreateHud() =>
-            InstantiateRegistered(AssetPath.HudPath);
+        public GameObject CreateHud()
+        {
+            var hud = InstantiateRegistered(AssetPath.HudPath);
+            foreach (OpenWindowButton openWindowButton in hud.GetComponentsInChildren<OpenWindowButton>())
+                openWindowButton.Construct(_windowService);
+            return hud;
+        }
 
         public GameObject CreateMonster(MonsterTypeId typeId, Transform parent)
         {
