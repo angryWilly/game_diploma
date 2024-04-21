@@ -1,4 +1,5 @@
-﻿using CodeBase.Data;
+﻿using System.Threading.Tasks;
+using CodeBase.Data;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.StaticData;
@@ -29,13 +30,11 @@ namespace CodeBase.Enemy.EnemySpawners
                 progress.KillData.ClearedSpawners.Add(Id);
         }
 
-        private void Spawn()
-        {
-            _factory
-                .CreateMonster(MonsterTypeId, transform)
+        private async void Spawn() => 
+            (await _factory
+                .CreateMonster(MonsterTypeId, transform))
                 .GetComponent<EnemyDeath>()
                 .Happened += Slay;
-        }
 
         private void Slay() =>
             _slain = true;
