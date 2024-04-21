@@ -9,13 +9,14 @@ namespace CodeBase.Infrastructure.Services.Ads
         private const string AndroidGameId = "5601977";
         private const string IOSGameId = "5601976";
 
-        private const string AndroidAdUnitId = "Rewarded_iOS";
-        private const string IOSAdUnitId = "Rewarded_Android";
+        private const string AndroidAdUnitId = "Rewarded_Android";
+        private const string IOSAdUnitId = "Rewarded_iOS";
         
         private string _gameId;
         private string _adUnitId;
-        private bool _testMode = true;
+        private readonly bool _testMode = true;
 
+        public int Reward => 12;
         public event Action RewardedVideoReady;
         private Action _onVideoFinished;
 
@@ -39,25 +40,23 @@ namespace CodeBase.Infrastructure.Services.Ads
                     Debug.Log("Unsupported platform for ads");
                     break;
             }
-
-            Advertisement.Initialize(_gameId, _testMode, this);
+            
+            if (!Advertisement.isInitialized && Advertisement.isSupported)
+                Advertisement.Initialize(_gameId, _testMode, this);
         }
 
         public void ShowRewardedVideo(Action onVideoFinished)
         {
+            Advertisement.Load(_adUnitId, this);
             Advertisement.Show(_adUnitId, this);
             _onVideoFinished = onVideoFinished;
         }
         
-        public void OnInitializationComplete()
-        {
+        public void OnInitializationComplete() => 
             Debug.Log("Unity Ads initialization complete.");
-        }
 
-        public void OnInitializationFailed(UnityAdsInitializationError error, string message)
-        {
+        public void OnInitializationFailed(UnityAdsInitializationError error, string message) => 
             Debug.Log($"Unity Ads Initialization Failed: {error.ToString()} - {message}");
-        }
 
         public void OnUnityAdsAdLoaded(string placementId)
         {
