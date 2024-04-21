@@ -30,12 +30,10 @@ namespace CodeBase.Enemy
         {
             _health.HealthChanged -= OnHealthChanged;
 
-            _move.enabled = false;
             _animator.PlayDeath();
-
             SpawnDeathFx();
             StartCoroutine(DestroyTimer());
-
+            
             Happened?.Invoke();
         }
 
@@ -44,6 +42,8 @@ namespace CodeBase.Enemy
 
         private IEnumerator DestroyTimer()
         {
+            _animator.StopMoving();
+            _move.enabled = false;
             yield return new WaitForSeconds(3);
             Destroy(gameObject);
         }

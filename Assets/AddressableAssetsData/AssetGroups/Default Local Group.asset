@@ -37,6 +37,18 @@ MonoBehaviour:
     m_Address: SpawnPoint
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 5804a75650311c7438dd6473b5bd9852
+    m_Address: Hero
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2d805c11ad0fc504eb3b53379e94ce24
+    m_Address: Hud
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b77282807d3a5fc4cb0f3084119f8463
+    m_Address: UIRoot
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: bdf5d777c0eb9af43b5669ed980a83a8, type: 2}
   m_SchemaSet:

@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelKey: Dungeon
   EnemySpawners:
-  - Id: Dungeon_02904cb6-1cba-42a7-97f4-46a95fb528aa
-    MonsterTypeId: 20
-    Position: {x: -7.97, y: 0.36699963, z: 29.21}
   - Id: _758b62bf-2efd-4284-8a63-e9ce2bfa582d
     MonsterTypeId: 0
     Position: {x: -3.35, y: 0.36699963, z: -1.59}
+  - Id: Dungeon_02904cb6-1cba-42a7-97f4-46a95fb528aa
+    MonsterTypeId: 20
+    Position: {x: -7.97, y: 0.36699963, z: 29.21}
   InitialHeroPosition: {x: -2.35, y: 0.49, z: -17.73}
