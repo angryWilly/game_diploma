@@ -45,15 +45,15 @@ namespace CodeBase.Infrastructure.Factory
             await _assetProvider.Load<GameObject>(AssetAddress.Spawner);
         }
 
-        public GameObject CreateHero(Vector3 at)
+        public async Task<GameObject> CreateHero(Vector3 at)
         {
-            _heroGameObject = InstantiateRegistered(AssetAddress.HeroPath, at);
+            _heroGameObject = await InstantiateRegisteredAsync(AssetAddress.HeroPath, at);
             return _heroGameObject;
         }
 
-        public GameObject CreateHud()
+        public async Task<GameObject> CreateHud()
         {
-            var hud = InstantiateRegistered(AssetAddress.HudPath);
+            var hud = await InstantiateRegisteredAsync(AssetAddress.HudPath);
             foreach (OpenWindowButton openWindowButton in hud.GetComponentsInChildren<OpenWindowButton>())
                 openWindowButton.Construct(_windowService);
             return hud;
@@ -137,16 +137,16 @@ namespace CodeBase.Infrastructure.Factory
             return gameObject;
         }
 
-        private GameObject InstantiateRegistered(string prefabPath, Vector3 at)
+        private async Task<GameObject> InstantiateRegisteredAsync(string prefabPath, Vector3 at)
         {
-            GameObject gameObject = _assetProvider.Instantiate(prefabPath, at);
+            GameObject gameObject = await _assetProvider.Instantiate(prefabPath, at);
             RegisterProgressWatchers(gameObject);
             return gameObject;
         }
 
-        private GameObject InstantiateRegistered(string prefabPath)
+        private async Task<GameObject> InstantiateRegisteredAsync(string prefabPath)
         {
-            GameObject gameObject = _assetProvider.Instantiate(prefabPath);
+            GameObject gameObject = await _assetProvider.Instantiate(prefabPath);
             RegisterProgressWatchers(gameObject);
             return gameObject;
         }
