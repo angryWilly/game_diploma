@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using CodeBase.CameraLogic;
 using CodeBase.Data;
 using CodeBase.Enemy.LootEnemy;
@@ -42,16 +43,17 @@ namespace CodeBase.Infrastructure.States
         {
             _curtain.Show();
             _gameFactory.CleanUp();
+            _gameFactory.WarmUp();
             _sceneLoader.Load(sceneName, OnLoaded);
         }
 
         public void Exit() =>
             _curtain.Hide();
 
-        private void OnLoaded()
+        private async void OnLoaded()
         {
             InitUIRoot();
-            InitGameWorld();
+            await InitGameWorld();
             InformProgressReaders();
 
             _stateMachine.Enter<GameLoopState>();
@@ -66,13 +68,13 @@ namespace CodeBase.Infrastructure.States
         private void InitUIRoot() => 
             _uiFactory.CreateUIRoot();
 
-        private void InitGameWorld()
+        private async Task InitGameWorld()
         {
-            var levelData = LevelStaticData();
+            LevelStaticData levelData = LevelStaticData();
 
-            InitSpawners(levelData);
+            await InitSpawners(levelData);
+            await InitLootPieces();
             InitTransferTrigger(levelData);
-            InitLootPieces();
             GameObject hero = InitHero(levelData);
             InitHud(hero);
             CameraFollow(hero);
@@ -83,17 +85,17 @@ namespace CodeBase.Infrastructure.States
             
         }
 
-        private void InitSpawners(LevelStaticData levelStaticData)
+        private async Task InitSpawners(LevelStaticData levelStaticData)
         {
             foreach (EnemySpawnerData spawnerData in levelStaticData.EnemySpawners)
-                _gameFactory.CreateSpawner(spawnerData.Position, spawnerData.Id, spawnerData.MonsterTypeId);
+                await _gameFactory.CreateSpawner(spawnerData.Position, spawnerData.Id, spawnerData.MonsterTypeId);
         }
 
-        private void InitLootPieces()
+        private async Task InitLootPieces()
         {
             foreach (KeyValuePair<string, LootPieceData> item in _progressService.Progress.WorldData.LootData.LootPiecesOnScene.Dictionary)
             {
-                LootPiece lootPiece = _gameFactory.CreateLoot();
+                LootPiece lootPiece = await _gameFactory.CreateLoot();
                 lootPiece.GetComponent<UniqueId>().Id = item.Key;
                 lootPiece.Initialize(item.Value.Loot);
                 lootPiece.transform.position = item.Value.Position.AsUnityVector3();

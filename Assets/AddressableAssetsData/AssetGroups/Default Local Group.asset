@@ -29,6 +29,14 @@ MonoBehaviour:
     m_Address: Lich
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: e478432cf564d9e498a54159b9fd1116
+    m_Address: Loot
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fe1f13b8b04ede5419443cb95fa4f876
+    m_Address: SpawnPoint
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: bdf5d777c0eb9af43b5669ed980a83a8, type: 2}
   m_SchemaSet:

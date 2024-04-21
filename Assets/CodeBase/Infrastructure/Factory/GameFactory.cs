@@ -39,15 +39,21 @@ namespace CodeBase.Infrastructure.Factory
             _windowService = windowService;
         }
 
+        public async Task WarmUp()
+        {
+            await _assetProvider.Load<GameObject>(AssetAddress.Loot);
+            await _assetProvider.Load<GameObject>(AssetAddress.Spawner);
+        }
+
         public GameObject CreateHero(Vector3 at)
         {
-            _heroGameObject = InstantiateRegistered(AssetPath.HeroPath, at);
+            _heroGameObject = InstantiateRegistered(AssetAddress.HeroPath, at);
             return _heroGameObject;
         }
 
         public GameObject CreateHud()
         {
-            var hud = InstantiateRegistered(AssetPath.HudPath);
+            var hud = InstantiateRegistered(AssetAddress.HudPath);
             foreach (OpenWindowButton openWindowButton in hud.GetComponentsInChildren<OpenWindowButton>())
                 openWindowButton.Construct(_windowService);
             return hud;
@@ -81,16 +87,19 @@ namespace CodeBase.Infrastructure.Factory
             return monster;
         }
 
-        public LootPiece CreateLoot()
+        public async Task<LootPiece> CreateLoot()
         {
-            var lootPiece = InstantiateRegistered(AssetPath.Loot).GetComponent<LootPiece>();
+            GameObject prefab = await _assetProvider.Load<GameObject>(AssetAddress.Loot);
+            LootPiece lootPiece = InstantiateRegistered(prefab)
+                .GetComponent<LootPiece>();
             lootPiece.Construct(_progressService.Progress.WorldData);
             return lootPiece;
         }
 
-        public void CreateSpawner(Vector3 at, string spawnerId, MonsterTypeId monsterTypeId)
+        public async Task CreateSpawner(Vector3 at, string spawnerId, MonsterTypeId monsterTypeId)
         {
-            var spawner = InstantiateRegistered(AssetPath.Spawner, at)
+            GameObject prefab = await _assetProvider.Load<GameObject>(AssetAddress.Spawner);
+            SpawnPoint spawner = InstantiateRegistered(prefab, at)
                 .GetComponent<SpawnPoint>();
 
             spawner.Construct(this);
@@ -112,6 +121,20 @@ namespace CodeBase.Infrastructure.Factory
                 ProgressWriters.Add(progressWriter);
 
             ProgressReaders.Add(progressReader);
+        }
+
+        private GameObject InstantiateRegistered(GameObject prefab, Vector3 at)
+        {
+            GameObject gameObject = Object.Instantiate(prefab, at, Quaternion.identity);
+            RegisterProgressWatchers(gameObject);
+            return gameObject;
+        }
+
+        private GameObject InstantiateRegistered(GameObject prefab)
+        {
+            GameObject gameObject = Object.Instantiate(prefab);
+            RegisterProgressWatchers(gameObject);
+            return gameObject;
         }
 
         private GameObject InstantiateRegistered(string prefabPath, Vector3 at)
