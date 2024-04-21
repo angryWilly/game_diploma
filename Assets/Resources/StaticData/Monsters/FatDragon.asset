@@ -13,11 +13,15 @@ MonoBehaviour:
   m_Name: FatDragon
   m_EditorClassIdentifier: 
   MonsterTypeId: 20
-  Hp: 10
-  Damage: 18
-  MaxLoot: 6
-  MinLoot: 32
-  EffectiveDistance: 0.5
+  Hp: 100
+  Damage: 30
+  MaxLoot: 666
+  MinLoot: 666
+  EffectiveDistance: 1
   Cleavage: 0.5
-  MoveSpeed: 3
-  Prefab: {fileID: 4490580572635992603, guid: c09d884e7ca40460f91e5b20675d3e94, type: 3}
+  MoveSpeed: 5
+  PrefabReference:
+    m_AssetGUID: c09d884e7ca40460f91e5b20675d3e94
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
