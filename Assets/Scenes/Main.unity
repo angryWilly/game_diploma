@@ -14929,6 +14929,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 699791669}
     m_Modifications:
+    - target: {fileID: 1363094261856264239, guid: 5da728b3458a25544b5520db97f9ee97, type: 3}
+      propertyPath: MonsterTypeId
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4598134418783325276, guid: 5da728b3458a25544b5520db97f9ee97, type: 3}
       propertyPath: m_Name
       value: SpawnMarker
